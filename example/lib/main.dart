@@ -1,5 +1,4 @@
-import 'package:example/spring_demo.dart';
-import 'package:fluid_spring/fluid_spring.dart';
+import 'package:fluid_spring/fluid_animations.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SpringDemo(),
+      home: const HomePage(),
     );
   }
 }

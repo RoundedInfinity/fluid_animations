@@ -1,4 +1,4 @@
-# Fluid Spring
+# Fluid Animations
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
@@ -6,62 +6,69 @@
 
 Create effortlessly smooth and responsive animations in your Flutter apps inspired by SwiftUI's spring animations.
 
-## Installation 💻
+VIDEO
 
-**❗ In order to start using Fluid Spring you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
+## Features
 
-Install via `flutter pub add`:
+- Effortlessly create smooth and responsive spring animations
+- Choose from preset animation styles (bouncy, smooth, snappy, interactive, ...)
+- Implicitly apply your springs to your widgets
 
-```sh
-dart pub add fluid_spring
+## Usage
+
+The simplest way of creating a spring is using the prebuilt ones. For example:
+```dart
+final mySpring = FluidSpring.bouncy;
 ```
 
----
+You can also create custom springs. `FluidSpring` has two properties: `dampingFraction` and `response`.
+```dart
+final mySpring = FluidSpring(dampingFraction: 0.8, response: 0.5);
+```
+**Response** controls how quickly an animating property value will try and get to a target. Higher values make the spring animation slower.
 
-## Continuous Integration 🤖
 
-Fluid Spring comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+**Damping Fraction** is the amount of drag applied to the value being animated. A lower damping fraction will make the spring "more bouncy".
 
-Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
+### Animating
 
----
+The simplest way to animate your widgets with a spring is using the `FluidTransitionBuilder`. It animates all changes of `value` using a spring.
 
-## Running Tests 🧪
-
-For first time users, install the [very_good_cli][very_good_cli_link]:
-
-```sh
-dart pub global activate very_good_cli
+```dart
+FluidTransitionBuilder<double>(
+  value: isHovered ? 200.0 : 100.0,
+  spring: FluidSpring.bouncy, // Use a bouncy spring animation
+  builder: (animation, child) {
+    return Container(
+      width: animation.value,
+      height: animation.value,
+      child: child,
+    );
+  },
+  child: const FlutterLogo()
+);
 ```
 
-To run all unit tests:
+When you need more control over your animation you can also use a `AnimationController` and run a spring simulation.
+```dart
+final spring = FluidSpring.smooth;
 
-```sh
-very_good test --coverage
+final simulation = SpringSimulation(spring, 0, 1, 0);
+
+_controller.animateWith(simulation);
 ```
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
+See the flutter example on how to [animate a widget using a physics simulation](https://docs.flutter.dev/cookbook/animation/physics-simulation).
 
-```sh
-# Generate Coverage Report
-genhtml coverage/lcov.info -o coverage/
+## Acknowledgements
 
-# Open Coverage Report
-open coverage/index.html
-```
+The math used is based on this [amazing article](https://github.com/jenox/UIKit-Playground/tree/master/01-Demystifying-UIKit-Spring-Animations/).
 
-[flutter_install_link]: https://docs.flutter.dev/get-started/install
-[github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
+Values for the prebuilt springs are from the [Apple Documentation](https://developer.apple.com/documentation/swiftui/animation) on animation.
+
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
-[logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
-[logo_white]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_white.png#gh-dark-mode-only
 [mason_link]: https://github.com/felangel/mason
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://pub.dev/packages/very_good_cli
-[very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
-[very_good_ventures_link]: https://verygood.ventures
-[very_good_ventures_link_light]: https://verygood.ventures#gh-light-mode-only
-[very_good_ventures_link_dark]: https://verygood.ventures#gh-dark-mode-only
-[very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
+

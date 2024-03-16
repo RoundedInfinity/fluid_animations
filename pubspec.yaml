@@ -1,6 +1,6 @@
-name: fluid_spring
+name: fluid_animations
 description: Create effortlessly smooth and responsive animations inspired by SwiftUI's spring animations.
-version: 1.0.0
+version: 0.0.1
 
 environment:
   sdk: "^3.3.0"

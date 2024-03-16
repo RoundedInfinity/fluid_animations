@@ -40,7 +40,7 @@ class FluidSpring extends SpringDescription {
   /// duration in seconds.
   final double response;
 
-  /// A default spring instance.
+  /// A smooth spring with no bounce.
   ///
   /// This uses the [default values for iOS](https://developer.apple.com/documentation/swiftui/animation/default).
   static const defaultSpring = FluidSpring(

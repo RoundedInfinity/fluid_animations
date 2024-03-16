@@ -1,4 +1,4 @@
-import 'package:fluid_spring/fluid_spring.dart';
+import 'package:fluid_spring/fluid_animations.dart';
 import 'package:flutter/material.dart';
 
 class FluidBuilderPage extends StatelessWidget {

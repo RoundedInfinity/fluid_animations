@@ -1,6 +1,6 @@
 // ignore_for_file: cascade_invocations
 
-import 'package:fluid_spring/fluid_spring.dart';
+import 'package:fluid_animations/fluid_animations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/physics.dart';
 
