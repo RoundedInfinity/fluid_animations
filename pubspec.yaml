@@ -1,0 +1,17 @@
+name: fluid_spring
+description: Create effortlessly smooth and responsive animations inspired by SwiftUI's spring animations.
+version: 1.0.0
+
+environment:
+  sdk: "^3.3.0"
+  flutter: "^3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.3
+  very_good_analysis: ^5.1.0
