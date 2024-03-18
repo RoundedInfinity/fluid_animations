@@ -1,4 +1,4 @@
-import 'package:fluid_spring/fluid_animations.dart';
+import 'package:fluid_animations/fluid_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
@@ -57,7 +57,7 @@ class _DragDemoState extends State<DragDemo>
 
     _animation =
         _controller.drive(AlignmentTween(begin: _dragAlignment, end: end));
-    const spring = FluidSpring();
+    final spring = FluidSpring();
 
     final simulation = SpringSimulation(
         spring, 0, 1, details.primaryVelocity!.abs().clamp(-20, 20).toDouble());

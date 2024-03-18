@@ -6,13 +6,13 @@
 
 Create effortlessly smooth and responsive animations in your Flutter apps inspired by SwiftUI's spring animations.
 
-VIDEO
+![Showcase of spring properties](https://raw.githubusercontent.com/RoundedInfinity/fluid_animations/master/docs/demo.gif)
 
 ## Features
 
 - Effortlessly create smooth and responsive spring animations
+- Customize animation behavior with damping and response parameters
 - Choose from preset animation styles (bouncy, smooth, snappy, interactive, ...)
-- Implicitly apply your springs to your widgets
 
 ## Usage
 

@@ -1,4 +1,5 @@
-import 'package:fluid_spring/fluid_animations.dart';
+import 'package:example/rubberbanding.dart';
+import 'package:fluid_animations/fluid_animations.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,7 +40,6 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: MouseRegion(
-          cursor: SystemMouseCursors.click,
           onEnter: (event) {
             setState(() {
               isHovered = true;
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           },
           child: FluidTransitionBuilder<double>(
             value: isHovered ? 200.0 : 100.0,
-            spring: FluidSpring.bouncy,
+            spring: const FluidSpring(bounce: 0.3),
             builder: (animation, child) {
               return SizedBox(
                 width: animation.value,

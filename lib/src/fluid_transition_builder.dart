@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 /// {@template fluid_transition_builder}
 /// A widget that creates smooth, physics-based transitions between values.
 ///
-/// Whenever [value] changes, this smoothly animated to the new value
+/// Whenever [value] changes, this animates to the new value
 /// using [spring].
 ///
 /// The [Duration] of this transition is based on the [spring].
@@ -17,6 +17,7 @@ import 'package:flutter/widgets.dart';
 /// **Example Usage**
 ///
 /// ```dart
+/// // Creating a hover effect.
 /// FluidTransitionBuilder<double>(
 ///   value: isHovered ? 200.0 : 100.0,
 ///   spring: FluidSpring.bouncy, // Use a bouncy spring animation
@@ -42,10 +43,12 @@ class FluidTransitionBuilder<T> extends StatefulWidget {
   const FluidTransitionBuilder({
     required this.value,
     required this.builder,
-    this.spring = const FluidSpring(),
+    this.spring = const FluidSpring.withDamping(),
     this.child,
     this.upperBound,
     this.lowerBound,
+    this.onDone,
+    this.onSettle,
     super.key,
   }) : assert(
           (upperBound != null && lowerBound != null) ||
@@ -84,6 +87,19 @@ class FluidTransitionBuilder<T> extends StatefulWidget {
   ///
   /// Can be used to clamp the spring to a minimal value.
   final double? lowerBound;
+
+  /// Called approximately when the spring animation ends.
+  ///
+  /// For [FluidSpring] this is called when its duration is reached.
+  ///
+  /// For other [SpringDescription]s this is called the same time as [onSettle].
+  final VoidCallback? onDone;
+
+  /// Called when the spring settles.
+  ///
+  /// Theoretically, springs never really stop, meaning this is just
+  /// an approximation of when this happens.
+  final VoidCallback? onSettle;
 
   @override
   State<FluidTransitionBuilder<T>> createState() =>
@@ -134,14 +150,30 @@ class _FluidTransitionBuilderState<T> extends State<FluidTransitionBuilder<T>>
 
     final newValue = widget.value;
 
+    final spring = widget.spring;
+
     if (oldValue != newValue) {
       _animation =
           _controller.drive(Tween<T>(begin: _animation.value, end: newValue));
 
-      final simulation =
-          SpringSimulation(widget.spring, 0, 1, -_controller.velocity);
+      final simulation = SpringSimulation(spring, 0, 1, -_controller.velocity);
 
-      _controller.animateWith(simulation);
+      if (spring is FluidSpring) {
+        Future<void>.delayed(
+          Duration(milliseconds: (spring.duration * 1000).toInt()),
+        ).then((_) {
+          if (_controller.value >= 1) {
+            widget.onDone?.call();
+          }
+        });
+      }
+
+      _controller.animateWith(simulation).then((value) {
+        widget.onSettle?.call();
+        if (spring is! FluidSpring) {
+          widget.onDone?.call();
+        }
+      });
     }
 
     super.didUpdateWidget(oldWidget);

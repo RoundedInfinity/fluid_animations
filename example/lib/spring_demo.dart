@@ -1,4 +1,4 @@
-import 'package:fluid_spring/fluid_animations.dart';
+import 'package:fluid_animations/fluid_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
@@ -55,8 +55,8 @@ class _SpringDemoViewState extends State<SpringDemoView>
       ),
     );
 
-    final spring =
-        FluidSpring(dampingFraction: dampingFraction, response: response);
+    final spring = FluidSpring.withDamping(
+        dampingFraction: dampingFraction, duration: response);
 
     final simulation = SpringSimulation(spring, 0, 1, 0);
 
