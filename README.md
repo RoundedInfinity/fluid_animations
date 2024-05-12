@@ -4,15 +4,15 @@
 [![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
 
-Create effortlessly smooth and responsive animations in your Flutter apps inspired by SwiftUI's spring animations.
+Create effortlessly smooth and responsive animations in your Flutter apps inspired by Apple's SwiftUI spring animations.
 
-![Showcase of spring properties](https://raw.githubusercontent.com/RoundedInfinity/fluid_animations/master/docs/demo.gif)
 
-## Features
+## Features 
 
-- Effortlessly create smooth and responsive spring animations
-- Customize animation behavior with damping and response parameters
-- Choose from preset animation styles (bouncy, smooth, snappy, interactive, ...)
+- ⚡️ Effortlessly create smooth and responsive spring animations 
+- 🎨 Choose from preset animation styles (bouncy, smooth, snappy, interactive, ...) 
+- 🔧 Easily create your own springs
+
 
 ## Usage
 
@@ -21,14 +21,14 @@ The simplest way of creating a spring is using the prebuilt ones. For example:
 final mySpring = FluidSpring.bouncy;
 ```
 
-You can also create custom springs. `FluidSpring` has two properties: `dampingFraction` and `response`.
+You can also create custom springs. `FluidSpring` has two properties: `duration` and `bounce`.
 ```dart
-final mySpring = FluidSpring(dampingFraction: 0.8, response: 0.5);
+final mySpring = FluidSpring(bounce: 0.4, duration: 0.5);
 ```
-**Response** controls how quickly an animating property value will try and get to a target. Higher values make the spring animation slower.
+**Duration**: Defines the pace of the spring. This is approximately equal to the settling duration.
 
 
-**Damping Fraction** is the amount of drag applied to the value being animated. A lower damping fraction will make the spring "more bouncy".
+**Bounce**: How bouncy the spring should be. A value of 0 indicates no bounces, positive values indicate increasing amounts of bounciness up to a maximum  of 1.0 (corresponding to undamped oscillation), and negative values indicate overdamped springs with a minimum value of -1.0.
 
 ### Animating
 
@@ -59,6 +59,10 @@ _controller.animateWith(simulation);
 ```
 
 See the flutter example on how to [animate a widget using a physics simulation](https://docs.flutter.dev/cookbook/animation/physics-simulation).
+
+### 2D Spring animations
+
+For 2D animations (e.g., animating positions like those seen in the demo video), use the `SpringSimulation2D` class. Refer to the example implementation for guidance.
 
 ## Acknowledgements
 

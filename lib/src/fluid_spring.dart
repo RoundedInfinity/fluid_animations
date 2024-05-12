@@ -88,6 +88,17 @@ class FluidSpring extends SpringDescription {
     //blend: 0.25
   );
 
+  /// Tunes the bounce amount of this [FluidSpring].
+  ///
+  /// Useful for quickly modifying springs.
+  ///
+  /// [duration] assigns a new duration to the curve.
+  FluidSpring extraBounce(double extraBounce, [double? duration]) =>
+      FluidSpring(
+        bounce: bounce + extraBounce,
+        duration: duration ?? this.duration,
+      );
+
   @override
   String toString() {
     // ignore: lines_longer_than_80_chars
