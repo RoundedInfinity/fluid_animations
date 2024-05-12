@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
 
-## 0.0.1 - 2024-03-16
+## 1.0.0 - 2024-05-12
 
 - initial release
 

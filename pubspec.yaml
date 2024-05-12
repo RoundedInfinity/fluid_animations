@@ -1,10 +1,11 @@
 name: fluid_animations
 description: Create effortlessly smooth and responsive animations inspired by SwiftUI's spring animations.
-version: 0.0.1
+version: 1.0.0
+repository: https://github.com/RoundedInfinity/fluid_animations
 
 environment:
-  sdk: "^3.3.0"
-  flutter: "^3.19.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=1.18.0"
 
 dependencies:
   flutter:

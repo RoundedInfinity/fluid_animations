@@ -137,7 +137,7 @@ class _DraggableCardState extends State<DraggableCard>
 }
 
 class _HoverLogo extends StatefulWidget {
-  const _HoverLogo({super.key});
+  const _HoverLogo();
 
   @override
   State<_HoverLogo> createState() => __HoverLogoState();

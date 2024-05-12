@@ -6,6 +6,7 @@
 
 Create effortlessly smooth and responsive animations in your Flutter apps inspired by Apple's SwiftUI spring animations.
 
+![Demo Gif showing 2D Spring based animation](https://github.com/RoundedInfinity/fluid_animations/blob/main/demo/spring_2d.gif?raw=true)
 
 ## Features 
 
@@ -62,7 +63,7 @@ See the flutter example on how to [animate a widget using a physics simulation](
 
 ### 2D Spring animations
 
-For 2D animations (e.g., animating positions like those seen in the demo video), use the `SpringSimulation2D` class. Refer to the example implementation for guidance.
+For 2D animations (e.g. animating positions like those seen in the demo video), use the `SpringSimulation2D` class. Refer to the [example](https://github.com/RoundedInfinity/fluid_animations/blob/main/example/lib/main.dart) implementation for guidance.
 
 ## Acknowledgements
 
