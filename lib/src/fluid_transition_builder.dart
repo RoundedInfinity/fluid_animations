@@ -160,7 +160,7 @@ class _FluidTransitionBuilderState<T> extends State<FluidTransitionBuilder<T>>
 
       if (spring is FluidSpring) {
         Future<void>.delayed(
-          Duration(milliseconds: (spring.duration * 1000).toInt()),
+          Duration(milliseconds: (spring.springDuration * 1000).toInt()),
         ).then((_) {
           if (_controller.value >= 1) {
             widget.onDone?.call();

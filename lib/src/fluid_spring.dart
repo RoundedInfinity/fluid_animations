@@ -9,9 +9,10 @@ import 'package:flutter/widgets.dart';
 class FluidSpring extends SpringDescription {
   /// Creates a spring with the specified duration and bounce.
   const FluidSpring({
-    this.duration = 0.5,
+    double duration = 0.5,
     this.bounce = 0,
-  })  : assert(
+  })  : springDuration = duration,
+        assert(
           -1 <= bounce && bounce <= 1,
           'The bounce value needs to be in a range of -1 to 1.',
         ),
@@ -29,8 +30,9 @@ class FluidSpring extends SpringDescription {
   /// critical damping.
   const FluidSpring.withDamping({
     double dampingFraction = 0.825,
-    this.duration = 0.5,
-  })  : bounce = 1 - dampingFraction,
+    double duration = 0.5,
+  })  : springDuration = duration,
+        bounce = 1 - dampingFraction,
         super(
           mass: 1,
           stiffness: (2 * pi / duration) * (2 * pi / duration),
@@ -42,7 +44,7 @@ class FluidSpring extends SpringDescription {
   /// This is approximately equal to the settling duration,
   /// but for springs with very large bounce values, will be the duration of
   /// the period of oscillation for the spring.
-  final double duration;
+  final double springDuration;
 
   /// How bouncy the spring should be.
   ///
@@ -96,12 +98,12 @@ class FluidSpring extends SpringDescription {
   FluidSpring extraBounce(double extraBounce, [double? duration]) =>
       FluidSpring(
         bounce: bounce + extraBounce,
-        duration: duration ?? this.duration,
+        duration: duration ?? springDuration,
       );
 
   @override
   String toString() {
     // ignore: lines_longer_than_80_chars
-    return '${objectRuntimeType(this, 'FluidSpring')}(bounce: $bounce, duration: $duration)';
+    return '${objectRuntimeType(this, 'FluidSpring')}(bounce: $bounce, duration: $springDuration)';
   }
 }
